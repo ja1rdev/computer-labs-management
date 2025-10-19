@@ -21,7 +21,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Secret key
-app.config["SECRET_KEY"] = secrets.token_hex(16)
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(16)
 
 # Secure connection using environment variables
 cnx = psycopg.connect(
@@ -432,4 +432,4 @@ def logout():
 
 # Start server
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
